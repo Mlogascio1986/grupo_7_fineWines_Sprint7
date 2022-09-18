@@ -33,10 +33,16 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       bodegasId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Bodegas",
+          key: "id"}
       },
       varietalId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Varietals",
+          key: "id"}
       },
       createdAt: {
         allowNull: false,

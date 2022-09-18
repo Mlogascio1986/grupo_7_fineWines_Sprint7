@@ -27,10 +27,15 @@
 						</div> 
 					<% } %>
 					<div class="form-div">
-						<label for="bodega" class="form-label">Bodega:</label>
-						<input type="bodega" id="bodega" name="bodega" 
-						placeholder="Ej: Etchart" value= "<%= locals.oldData ? oldData.bodega : null %>"
-						class="form-input">
+						<label for="bodegasId" class="form-label">Bodega:</label>
+						<select name="bodegasId" id="">
+							<% bodegas.forEach(bodega => { %>
+							 <option value="<%= bodega.id %>"><%= bodega.nameBodega %> </option>
+							<% }) %>
+						</select>
+						<!--<input type="text" id="bodegasId" name="bodegasId" 
+						placeholder="Ej: Etchart" value= "<%= locals.oldData ? oldData.bodega : null %>
+						"class="form-input">-->
 					</div>
 					<br><% if (locals.errors && errors.bodega) { %>
 						<div class="errorValidacion">
@@ -38,10 +43,15 @@
 						</div> 
 					<% } %>
 					<div class="form-div">
-						<label for="varietal" class="form-label">Varietal:</label>
-						<input type="text" id="varietal" name="varietal" 
+						<label for="varietalId" class="form-label">Varietal:</label>
+						<select name="varietalId" id="">
+							<% varietales.forEach(varietal => { %>
+							 <option value="<%= varietal.id %>"><%= varietal.nameVarietal %> </option>
+							<% }) %>
+						</select>
+						<!--<input type="text" id="varietalId" name="varietalId" 
 						placeholder="Ej: Tinto" value= "<%= locals.oldData ? oldData.varietal : null %>"
-						class="form-input">
+						class="form-input">-->
 					</div>
 					<br><% if (locals.errors && errors.varietal) { %>
 						<div class="errorValidacion">

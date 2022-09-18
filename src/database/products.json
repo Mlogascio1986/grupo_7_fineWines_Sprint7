@@ -180,5 +180,33 @@
    "Product-img-1663517062638hola.jpg"
   ],
   "id": 13
+ },
+ {
+  "name": "Nombre",
+  "bodegasId": "1",
+  "varietalId": "1",
+  "price": "1000",
+  "discount": "",
+  "category": "Blanco",
+  "description": "Descripcion",
+  "visitado": false,
+  "image": [
+   "Product-img-1663538895656hola.jpg"
+  ],
+  "id": 14
+ },
+ {
+  "name": "Probando con select",
+  "bodegasId": "2",
+  "varietalId": "2",
+  "price": "1000",
+  "discount": "",
+  "category": "Blanco",
+  "description": "Con tablas FK",
+  "visitado": false,
+  "image": [
+   "Product-img-1663541079387hola.jpg"
+  ],
+  "id": 15
  }
 ]

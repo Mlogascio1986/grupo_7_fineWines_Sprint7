@@ -1,4 +1,4 @@
-const {Product} = require('../dataBase/models');
+const {Product, Bodegas, Varietal} = require('../dataBase/models');
 
 const  {validationResult} = require('express-validator');
 const path = require('path');
@@ -29,8 +29,17 @@ const controller = {
 	},
 
 	// Create - Form to create
-	create: (req, res) => {
-		res.render('product-create-form')
+	create: async (req, res) => {
+        try {
+            const bodegas = await Bodegas.findAll()
+            const varietales = await Varietal.findAll()
+            console.log(varietales);
+            res.render("product-create-form", { bodegas, varietales })
+
+        } catch (error) {
+            res.json(error.message)
+        } 
+		//res.render('product-create-form')
 	},
 
 	// Create -  Method to store

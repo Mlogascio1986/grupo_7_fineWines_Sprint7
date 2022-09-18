@@ -166,5 +166,19 @@
    "Product-img-1662064212063hola.jpg"
   ],
   "id": 12
+ },
+ {
+  "name": "Nombre",
+  "bodega": "Bodega",
+  "varietal": "Varietal",
+  "price": "1000",
+  "discount": "0.1",
+  "category": "Blanco",
+  "description": "Descripcion",
+  "visitado": false,
+  "image": [
+   "Product-img-1663517062638hola.jpg"
+  ],
+  "id": 13
  }
 ]

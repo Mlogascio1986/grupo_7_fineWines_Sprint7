@@ -18,10 +18,10 @@ module.exports = {
         type: Sequelize.DECIMAL
       },
       category: {
-        type: Sequelize.INTEGER
+        type: Sequelize.TEXT
       },
       discount: {
-        type: Sequelize.INTEGER
+        type: Sequelize.DECIMAL
       },
       stock: {
         type: Sequelize.INTEGER

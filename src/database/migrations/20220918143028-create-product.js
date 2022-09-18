@@ -17,6 +17,12 @@ module.exports = {
       price: {
         type: Sequelize.DECIMAL
       },
+      category: {
+        type: Sequelize.INTEGER
+      },
+      discount: {
+        type: Sequelize.INTEGER
+      },
       stock: {
         type: Sequelize.INTEGER
       },
@@ -26,25 +32,11 @@ module.exports = {
       stock_max: {
         type: Sequelize.INTEGER
       },
-      category: {
-        type: Sequelize.INTEGER
-      },
-      discount: {
-        type: Sequelize.INTEGER
-      },
       bodegasId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "Bodegas",
-          key: "id"
-        }
+        type: Sequelize.INTEGER
       },
       varietalId: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: "Varietals",
-          key: "id"
-        }
+        type: Sequelize.INTEGER
       },
       createdAt: {
         allowNull: false,

@@ -1,11 +1,12 @@
-const path = require('path')
+const {Product} = require('../dataBase/models');
+
+const  {validationResult} = require('express-validator');
+const path = require('path');
 const fs = require('fs');
-const { validationResult } = require("express-validator");
+const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
 const jsonDB = require('../model/jsonDatabase');
 const productModel = jsonDB('products')
-const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-
 
 const controller = {
 
@@ -33,8 +34,8 @@ const controller = {
 	},
 
 	// Create -  Method to store
-	store: (req, res) => {
-
+	store: async (req, res) => {
+        try {
         // const files = req.files;
         const { files } = req;
         
@@ -97,9 +98,17 @@ const controller = {
             // Si no mando imágenes pongo una por defecto
             image: req.files.length >= 1 ? imagenes : ["default-image.png"]
         }
+        const { body } = req;
+            const newbie = await Product.create({
+                ...body
+            });
+            
         productModel.create(newProduct);
         console.log('cree un nuevo producto')
         res.redirect('/')
+        } catch (error) {
+        res.json(error.message)
+        }
     },
 	
 	// Update - Form to edit
@@ -221,7 +230,5 @@ const controller = {
 
 
 };
-
-
 
 module.exports = controller;

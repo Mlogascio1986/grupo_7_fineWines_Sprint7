@@ -1,10 +1,11 @@
 const path = require('path')
 const fs = require('fs');
-const jsonDB = require('../model/jsonDatabase.js');
-const userModel = jsonDB('users')
 const { validationResult } = require("express-validator");
 const bcryptjs = require('bcryptjs');
 const cookies = require('cookie-parser');
+const {User, Rol} = require("../database/models");
+const {Op} = require('sequelize')
+
 //Objeto literal userController
 //Viene de userRouter a cada modulo
 
@@ -14,33 +15,42 @@ const userController = {
         res.render('users/login.ejs');
     },
 
-	loginProcess: (req, res) => {
+	loginProcess: async (req, res) => {
 		console.log("llego al proceso de login")
-		let userToLogin = userModel.findFirstByField("email", req.body.email)
-
-		//console.log(req.body.nombreUsuario)
+		//let userToLogin = userModel.findFirstByField("email", req.body.email)
+        try{
+            const userToLogin = await User.findOne({
+                where: {
+                    email :  {[Op.eq] : req.body.email}
+                 },
+            })
+        
+            //console.log(req.body.nombreUsuario)
 		console.log(userToLogin)
-// dos problemas: 1. no encuentra el user.
+        // dos problemas: 1. no encuentra el user.
+        
+                if(userToLogin){
+                    console.log("llego al if con userToLogin = true")
+                    let isOkThePassword = bcryptjs.compareSync(req.body.password, userToLogin.password)
+                    
+                    if(isOkThePassword){
+                        // borro la psw para que no quede en las cookies
+                        delete userToLogin.password;
+                        // en el request, en session genero una propiedad que se va a llamar 
+                        //creo userLogged en session con la informacion del usuario
+                        req.session.userLogged = userToLogin
+                        //si recordarme esta selected mando cookie con email/nombreUsuario
+                        if(req.body.remember_user) {
+                            res.cookie('userEmail', req.body.email, { maxAge: (1000 * 60) * 60 })
+                        }
+                        return res.render('users/profile.ejs', {user: req.session.userLogged})
+                    }}
+                    return res.render('users/login.ejs',{errors: 
+                                                            {credenciales: 
+                                                                {msg: 'Las credenciales son invalidas'}}})
 
-		if(userToLogin){
-			console.log("llego al if con userToLogin = true")
-			let isOkThePassword = bcryptjs.compareSync(req.body.password, userToLogin.password)
-			
-			if(isOkThePassword){
-				// borro la psw para que no quede en las cookies
-				delete userToLogin.password;
-				// en el request, en session genero una propiedad que se va a llamar 
-				//creo userLogged en session con la informacion del usuario
-				req.session.userLogged = userToLogin
-                //si recordarme esta selected mando cookie con email/nombreUsuario
-                if(req.body.remember_user) {
-					res.cookie('userEmail', req.body.email, { maxAge: (1000 * 60) * 60 })
-				}
-				return res.render('users/profile.ejs', {user: req.session.userLogged})
-			}}
-			return res.render('users/login.ejs',{errors: 
-													{credenciales: 
-														{msg: 'Las credenciales son invalidas'}}})
+        } 
+        catch (error) {res.json(error.message) }
 	},
 
 	logout: (req,res) => {
@@ -59,7 +69,7 @@ const userController = {
     register:(req, res) => {
         res.render('users/register.ejs');
     },
-	processRegister: (req, res) => {
+	processRegister: async (req, res) => {
 
         const countries = ["Argentina", "Uruguay", "Paraguay", "Chile", "Bolivia", "Perú", "Brasil", "Ecuador", "Venezuela", "Colombia"]; 
 
@@ -87,60 +97,61 @@ const userController = {
             })
         }
         
-        const existeEmail = userModel.findFirstByField("email", req.body.email);
+        //const existeEmail = userModel.findFirstByField("email", req.body.email);
 
-        if(existeEmail){
-            if(file){
-                const filePath = path.join(__dirname, `../../public/images/users/${file.filename}`);
-                fs.unlinkSync(filePath);
-            }
-
-            const error = {
-                email: {
-                    msg: "Este email ya está registrado"
-                }
-            }
-
-            return res.render("./users/register", {
-                errors: error,
-                oldData: req.body,
-                
+        try{ const existeEmail = await User.findOne({
+                where: {
+                    email :  {[Op.eq] : req.body.email}
+                 },
             })
-        }
+            console.log(existeEmail)
+            if(existeEmail!== null){
+                if(file){
+                    const filePath = path.join(__dirname, `../../public/images/users/${file.filename}`);
+                    fs.unlinkSync(filePath);
+                }
+    
+                const error = {
+                    email: {
+                        msg: "Este email ya está registrado"
+                    }
+                }
+    
+                return res.render("./users/register", {
+                    errors: error,
+                    oldData: req.body,
+                    
+                })
+            }
+    
+            delete req.body.confirmPassword;
+        } 
+        catch (error) {res.json(error.message) }
+        
 
-        delete req.body.confirmPassword;
-
-        const newUsuario = {
+        /*const newUsuario = {
             ...req.body,
             password: bcryptjs.hashSync(req.body.password, 10),
             image: file ? file.filename : "default-user.png"
-        };
-
-        // newUsuario.categoria.trim();
-        userModel.create(newUsuario);
+        };*/
+        
+        try {   
+            const image = file ? file.filename : "default-user.png"
+            User.create({
+                    nombres: req.body.nombres,
+                    apellidos: req.body.apellidos,
+                    nombreUsuario: req.body.nombreUsuario,
+                    email: req.body.email,
+                    domicilio: req.body.domicilio,
+                    password: bcryptjs.hashSync(req.body.password, 10),
+                    image: file ? file.filename : "default-user.png",
+                    idRol: 1
+                });
+        } catch (error) {
+            res.json(error.message)}
 
         return res.redirect("/user/login");
-    },
-	// Create -  Method to store
-	store: (req, res) => {
-		
-		//let imagen = req.file.filename
-		const newUser = {
-			id: 1, 
-			...req.body,
-			//piso el password del body con la psw hasheada. 
-			//El objeto literal no puede tener dos passwords por eso la pisa
-			password: bcryptjs.hashSync(req.body.password, 10),
-			// Si no mando imágenes pongo na por defecto
-			//image:req.files != undefined?imagenes:"default.jpg"
-			image: req.file !== undefined ? req.file.filename : "default-image.png",
-		};
-
-		userModel.create(newUser)
-		console.log('cree un nuevo usuario')
-		res.redirect('/')
-	},
-
+    }
 }
 
 module.exports = userController

@@ -22,9 +22,9 @@
             <span>Basado en tu última visita</span>
             </div>
             <div class="products">
-                <% products.forEach(product => {if(product.visitado == true){%>
+                <% productsHk.forEach(product => {if(product.visitado == "true"){%>
                     <article class="articulo">
-                        <a href="/productDetail/<%= product.id %>"><img src="images/products/<%= product.image %>" class="product_img"></a>
+                        <a href="/productDetail/<%= product.id %>"><img src="images/products/<%= product.Imagesproducts[0].nameImage %>" class="product_img"></a>
                         <div class="detalle">
                             <div class="price-and-discount">
                                 <p class="price">$<%= product.price %></p>
@@ -34,8 +34,8 @@
                                 <i class="fa-solid fa-cart-shopping"></i>
                             </div>
                                 <div>
-                                    <h4 class="bodega"><%= product.bodega %></h4>
-                                    <h5 class="varietal"><%= product.varietal %></h5>
+                                    <h4 class="bodega"><%= product.Bodega.nameBodega %></h4>
+                                    <h5 class="varietal"><%= product.Varietal.nameVarietal %></h5>
                                 </div>
                         </div>
                     </article>
@@ -49,9 +49,9 @@
             <span>Ofertas</span>
             </div>
             <div class="products">
-                <% products.forEach(product => { if(product.discount > 0){%>
+                <% productsHk.forEach(product => { if(product.discount > 0){%>
                     <article class="articulo">
-                        <a href="/productDetail/<%= product.id %>"><img src="/images/products/<%= product.image %>" class="product_img"></a>
+                        <a href="/productDetail/<%= product.id %>"><img src="/images/products/<%= product.Imagesproducts[0].nameImage %>" class="product_img"></a>
                         <div class="detalle">
                             <div class="price-and-discount">
                                 <p class="price">$<%= product.price %></p>
@@ -59,8 +59,8 @@
                                 <i class="fa-solid fa-cart-shopping"></i>
                             </div>
                                 <div>
-                                    <h4 class="bodega"><%= product.bodega %></h4>
-                                    <h5 class="varietal"><%= product.varietal %></h5>
+                                    <h4 class="bodega"><%= product.Bodega.nameBodega %></h4>
+                                    <h5 class="varietal"><%= product.Varietal.nameVarietal %></h5>
                                 </div>
                         </div>
                     </article>

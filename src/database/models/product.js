@@ -25,7 +25,8 @@ module.exports = (sequelize, DataTypes) => {
     stock_min: DataTypes.INTEGER,
     stock_max: DataTypes.INTEGER,
     bodegaId: DataTypes.INTEGER,
-    varietalId: DataTypes.INTEGER
+    varietalId: DataTypes.INTEGER,
+    visitado: DataTypes.TEXT
   }, {
     sequelize,
     modelName: 'Product',

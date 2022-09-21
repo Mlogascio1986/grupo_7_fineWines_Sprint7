@@ -15,8 +15,8 @@ const mainController = {
             const productsHk = await Product.findAll({
                 include: [Varietal, Bodegas, Imagesproduct]
             })
-            const products = productModel.readFile()
-            res.render('index', {products, productsHk});
+           
+            res.render('index', { productsHk});
         } catch (error) {
             res.json(error.message) 
         }

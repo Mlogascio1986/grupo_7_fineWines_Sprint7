@@ -51,6 +51,9 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      visitado: {
+        type: Sequelize.TEXT
       }
     });
   },

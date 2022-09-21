@@ -1,4 +1,4 @@
-const {Product, Bodegas, Varietal} = require('../dataBase/models');
+const {Product, Bodegas, Varietal, Imagesproduct} = require('../dataBase/models');
 
 const  {validationResult} = require('express-validator');
 const path = require('path');
@@ -33,8 +33,7 @@ const controller = {
         try {
             const bodegas = await Bodegas.findAll()
             const varietales = await Varietal.findAll()
-            console.log(varietales);
-            res.render("product-create-form", { bodegas, varietales })
+            res.render("product-create-form", {bodegas,varietales})
 
         } catch (error) {
             res.json(error.message)
@@ -45,6 +44,7 @@ const controller = {
 	// Create -  Method to store
 	store: async (req, res) => {
         try {
+           
         // const files = req.files;
         const { files } = req;
         
@@ -78,13 +78,13 @@ const controller = {
 
             console.log("-------- resultadosValidaciones.mapped() -------------------")
             console.log(resultadosValidaciones.mapped());  
-
+            
             console.log(req.body);
             return res.render('product-create-form', {
                 errors: resultadosValidaciones.mapped(),
                 // oldData son los datos recién cargados es decir el req.body
-                oldData: req.body
-                 
+                oldData: req.body,
+              
             })
             
         }
@@ -107,14 +107,31 @@ const controller = {
             // Si no mando imágenes pongo una por defecto
             image: req.files.length >= 1 ? imagenes : ["default-image.png"]
         }
+        //Grabo Product con spreadOperator en Db Sql 
         const { body } = req;
             const newbie = await Product.create({
                 ...body
             });
-            
-        productModel.create(newProduct);
+        let Images= []
+            //pusheo files al array de imagenes con el id del product creado
+            for(let i = 0 ; i<req.files.length;i++) {
+                Images.push({
+                    nameImage: req.files[i].filename,
+                    productId: newbie.id
+                })
+            }   
+         //Reviso imagenes, si hay uso bulkCreate   
+         if (Images.length > 0) {
+                await Imagesproduct.bulkCreate(Images)
+                res.redirect('/')
+            } else {
+                //si no hay subo default
+                await Imagesproduct.create([{
+                    nameImage: 'default-product-image.png',
+                    productId: newbie.id,
+                }])}    
         console.log('cree un nuevo producto')
-        res.redirect('/')
+        res.render('/')
         } catch (error) {
         res.json(error.message)
         }

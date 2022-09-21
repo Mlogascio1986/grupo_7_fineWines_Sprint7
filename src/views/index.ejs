@@ -72,9 +72,10 @@
             <span>Catalogo de Espiritus</span>
             </div>
             <div class="products">
-                <% products.forEach(product => {if(product.visitado == false && product.discount == 0){%>
+                <% productsHk.forEach(product => {%>
+                    
                     <article class="articulo">
-                        <a href="/productDetail/<%= product.id %>"><img src="images/products/<%= product.image %>" class="product_img"></a>
+                        <a href="/productDetail/<%= product.id %>"><img src="images/products/<%= product.Imagesproducts[0].nameImage %>" class="product_img"></a>
                         <div class="detalle">
                             <div class="price-and-discount">
                                 <p class="price">$<%= product.price %></p>
@@ -84,12 +85,12 @@
                                 <i class="fa-solid fa-cart-shopping"></i>
                             </div>
                                 <div>
-                                    <h4 class="bodega"><%= product.bodega %></h4>
-                                    <h5 class="varietal"><%= product.varietal %></h5>
+                                    <h4 class="bodega"><%= product.Bodega.nameBodega %></h4>
+                                    <h5 class="varietal"><%= product.Varietal.nameVarietal %></h5>
                                 </div>
                         </div>
                     </article>
-                <%}}) %>
+                <%}) %>
             </div>
                   
         </section>

@@ -14,7 +14,7 @@ try{
          },
     })
 //let userFromCookie = userModel.findFirstByField("email", emailInCookie);
-console.log(userFromCookie);
+//console.log(userFromCookie);
 if (userFromCookie) {
     req.session.userLogged= userFromCookie;
 }

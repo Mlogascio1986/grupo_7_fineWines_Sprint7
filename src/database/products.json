@@ -168,44 +168,44 @@
   "id": 12
  },
  {
-  "name": "Nombre",
-  "bodega": "Bodega",
-  "varietal": "Varietal",
-  "price": "1000",
-  "discount": "0.1",
-  "category": "Blanco",
-  "description": "Descripcion",
+  "name": "fdghgshsgh",
+  "bodegasId": "2",
+  "varietalId": "3",
+  "price": "100",
+  "discount": "",
+  "category": "Rosado",
+  "description": "sdffds",
   "visitado": false,
   "image": [
-   "Product-img-1663517062638hola.jpg"
+   "Product-img-1663691333177hola.jpg"
   ],
   "id": 13
  },
  {
-  "name": "Nombre",
+  "name": "Sale otro",
   "bodegasId": "1",
-  "varietalId": "1",
-  "price": "1000",
+  "varietalId": "2",
+  "price": "1500",
   "discount": "",
   "category": "Blanco",
-  "description": "Descripcion",
+  "description": "Perfecto con tus asados",
   "visitado": false,
   "image": [
-   "Product-img-1663538895656hola.jpg"
+   "Product-img-1663708924150hola.jpg"
   ],
   "id": 14
  },
  {
-  "name": "Probando con select",
-  "bodegasId": "2",
-  "varietalId": "2",
-  "price": "1000",
+  "name": "Nuevo",
+  "bodegasId": "1",
+  "varietalId": "1",
+  "price": "3000",
   "discount": "",
   "category": "Blanco",
-  "description": "Con tablas FK",
+  "description": "Total",
   "visitado": false,
   "image": [
-   "Product-img-1663541079387hola.jpg"
+   "Product-img-1663710830985hola.jpg"
   ],
   "id": 15
  }

@@ -1,3 +1,4 @@
+const {Product, Bodegas, Varietal, Imagesproduct} = require('../dataBase/models');
 // requerimos el modelo para consultar la base de datos json
 const jsonDB = require('../model/jsonDatabase');
 // indicamos cual de las bases de datos queremos
@@ -9,9 +10,17 @@ const { validationResult } = require("express-validator");
 //Objeto literal mainController
 //Viene de mainRouter a cada modulo
 const mainController = {
-    index: (req,res) => {
-        const products = productModel.readFile()
-        res.render('index', {products});
+    index: async (req,res) => {
+        try {
+            const productsHk = await Product.findAll({
+                include: [Varietal, Bodegas, Imagesproduct]
+            })
+            const products = productModel.readFile()
+            res.render('index', {products, productsHk});
+        } catch (error) {
+            res.json(error.message) 
+        }
+       
     },
     productCart: (req,res) => {
         res.render('productCart');

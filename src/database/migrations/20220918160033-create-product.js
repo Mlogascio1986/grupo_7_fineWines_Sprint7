@@ -32,7 +32,7 @@ module.exports = {
       stock_max: {
         type: Sequelize.INTEGER
       },
-      bodegasId: {
+      bodegaId: {
         type: Sequelize.INTEGER,
         references: {
           model: "Bodegas",

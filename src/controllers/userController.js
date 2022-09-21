@@ -16,7 +16,7 @@ const userController = {
     },
 
 	loginProcess: async (req, res) => {
-		console.log("llego al proceso de login")
+		//console.log("llego al proceso de login")
 		//let userToLogin = userModel.findFirstByField("email", req.body.email)
         try{
             const userToLogin = await User.findOne({
@@ -26,7 +26,7 @@ const userController = {
             })
         
             //console.log(req.body.nombreUsuario)
-		console.log(userToLogin)
+		//console.log(userToLogin)
         // dos problemas: 1. no encuentra el user.
         
                 if(userToLogin){
@@ -43,7 +43,8 @@ const userController = {
                         if(req.body.remember_user) {
                             res.cookie('userEmail', req.body.email, { maxAge: (1000 * 60) * 60 })
                         }
-                        return res.render('users/profile.ejs', {user: req.session.userLogged})
+                        //return res.render('users/profile.ejs', {user: req.session.userLogged})
+                        return res.redirect("/")
                     }}
                     return res.render('users/login.ejs',{errors: 
                                                             {credenciales: 
@@ -83,12 +84,12 @@ const userController = {
                 fs.unlinkSync(filePath);
             }
 
-            console.log(req.body);
+            //console.log(req.body);
 
             delete req.body.password;   
             delete req.body.confirmPassword;
 
-            console.log(req.body);
+            //console.log(req.body);
 
             return res.render("./users/register", {
                 errors: errores.mapped(),
@@ -104,7 +105,7 @@ const userController = {
                     email :  {[Op.eq] : req.body.email}
                  },
             })
-            console.log(existeEmail)
+            //console.log(existeEmail)
             if(existeEmail!== null){
                 if(file){
                     const filePath = path.join(__dirname, `../../public/images/users/${file.filename}`);

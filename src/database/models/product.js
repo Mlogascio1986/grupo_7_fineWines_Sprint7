@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       this.belongsTo(models.Bodegas);
       this.belongsTo(models.Varietal);
+      this.hasMany(models.Imagesproduct);
     }
   }
   Product.init({
@@ -23,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
     stock: DataTypes.INTEGER,
     stock_min: DataTypes.INTEGER,
     stock_max: DataTypes.INTEGER,
-    bodegasId: DataTypes.INTEGER,
+    bodegaId: DataTypes.INTEGER,
     varietalId: DataTypes.INTEGER
   }, {
     sequelize,

@@ -7,7 +7,7 @@ const productCreateValidation = [
         .notEmpty().withMessage("No puede estar el campo vacio").bail()
         .isLength({ min: 4 }).withMessage('Debes escribir un nombre de producto con más de 4 caracteres'),
     
-    body('bodegasId')
+    body('bodegaId')
         .notEmpty().withMessage("No puede estar el campo vacio").bail(),
         //.isLength({ min: 4 }).withMessage('Debes escribir una bodega con más de 4 caracteres'),
     

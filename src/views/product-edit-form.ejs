@@ -34,7 +34,7 @@
             <div class="form-div">
                 <label for="bodega" class="form-label">Bodega:</label>
                 <input type="bodega" id="bodega" name="bodega" 
-                value="<%= locals.oldData ? oldData.bodega : productToEdit.bodega %>"
+                value="<%= locals.oldData ? oldData.bodega : productToEdit.Bodega.nameBodega %>"
                 class="form-input">
             </div>
             <% if (locals.errors && errors.bodega) { %>
@@ -45,7 +45,7 @@
             <div class="form-div">
                 <label for="varietal" class="form-label">Varietal:</label>
                 <input type="text" id="varietal" name="varietal" 
-                value="<%= locals.oldData ? oldData.varietal : productToEdit.varietal %>"
+                value="<%= locals.oldData ? oldData.varietal : productToEdit.Varietal.nameVarietal %>"
                 class="form-input">
             </div>
             <% if (locals.errors && errors.varietal) { %>
@@ -74,7 +74,7 @@
                 <label for="image" class="form-label">Foto:</label>
                 <input type="file" id="image" accept=".png, .jpeg, .jpg" 
                 name="image" placeholder="Ingrese una foto" class="form-input" 
-                value="<%= productToEdit.image[0]%>"  multiple>
+                value="<%= productToEdit.Imagesproducts[0].nameImage%>"  multiple>
             </div>
             <% if (locals.errors && errors.image) { %>
                 <div class="errorValidacion">

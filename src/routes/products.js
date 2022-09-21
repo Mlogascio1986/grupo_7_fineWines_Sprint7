@@ -22,7 +22,7 @@ router.post('/', upload.array('image'),productCreateValidation, productsControll
 
 
 /*** GET ONE PRODUCT ***/ 
-router.get('/detail/:id', productsController.detail); 
+//router.get('/detail/:id', productsController.detail); 
 
 /*** EDIT ONE PRODUCT ***/ 
 router.get('/edit/:id', productsController.edit); 

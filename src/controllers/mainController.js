@@ -39,7 +39,7 @@ const mainController = {
                 include: [Bodegas,Varietal,Imagesproduct]
             });
             return res.render('productDetail', {product});
-            res.json(error.message)
+            
         }catch (error) {
             res.json(error.message)
         }

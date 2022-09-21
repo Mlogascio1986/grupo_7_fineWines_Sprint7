@@ -11,7 +11,7 @@ const productModel = jsonDB('products')
 const controller = {
 
 
-	detail: (req, res) => {
+	/*detail: (req, res) => {
 		const product = productModel.find(req.params.id)
 		console.log("------------ESTOY EN DETAIL----------------------")
 		console.log(product)
@@ -26,7 +26,7 @@ const controller = {
 			product,
 			toThousand
 		})
-	},
+	},*/
 
 	// Create - Form to create
 	create: async (req, res) => {
@@ -140,11 +140,21 @@ const controller = {
 	// Update - Form to edit
 
 
-	edit: (req, res) => {
-		console.log('ESTOY USANDO EL EDIT DEL GENERICO')
-		let productToEdit = productModel.find(req.params.id)
+	edit: async (req, res) => {
+		//console.log('ESTOY USANDO EL EDIT DEL GENERICO')
+        try {
+            const { id } = req.params
+            const productToEdit = await Product.findByPk(id, {
+                include: [Bodegas,Varietal,Imagesproduct]
+            });
+            return res.render('product-edit-form', {productToEdit});
+            
+        }catch (error) {
+            res.json(error.message)
+        }
+		/*let productToEdit = productModel.find(req.params.id)
 		console.log(productToEdit)
-		res.render('product-edit-form', { productToEdit })
+		res.render('product-edit-form', { productToEdit })*/
 	},
 
 	// Update - Method to update

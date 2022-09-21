@@ -31,12 +31,22 @@ const mainController = {
     register:(req, res) => {
         res.render('users/register.ejs');
     },
-    productDetail: (req,res) => {
-        const id = Number(req.params.id);
-        const products = productModel.readFile()
-        const product = products.find( product => product.id === id);
+    productDetail: async (req,res) => {
+        //const id = Number(req.params.id);
+        try {
+            const { id } = req.params
+            const product = await Product.findByPk(id, {
+                include: [Bodegas,Varietal,Imagesproduct]
+            });
+            return res.render('productDetail', {product});
+            res.json(error.message)
+        }catch (error) {
+            res.json(error.message)
+        }
+        //const products = productModel.readFile()
+        //const product = products.find( product => product.id === id);
 
-        res.render('productDetail', {product});
+        //res.render('productDetail', {product});
     }
 }
 

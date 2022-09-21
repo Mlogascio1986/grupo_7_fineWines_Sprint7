@@ -4,7 +4,7 @@
         
         <article>
             <div class="imagen">
-                <img class="zoom"src="/images/products/<%= product.image %> " class="product_img" alt="vino bressia">
+                <img class="zoom"src="/images/products/<%= product.Imagesproducts[0].nameImage %> " class="product_img" alt="vino bressia">
             </div>
             <div class="main-article">
                  <div class="description1">
@@ -17,8 +17,8 @@
         <div class="tipo-vino">
             <div class="tipo-vino1">
                <ul class="lista-vino">
-                <li class="detalle-lista"><%= product.varietal %></li>
-                <li class="detalle-lista"><%= product.bodega %></li>
+                <li class="detalle-lista"><%= product.Varietal.nameVarietal %></li>
+                <li class="detalle-lista"><%= product.Bodega.nameBodega %></li>
                </ul>
             </div>
             <div class="miscelanea">

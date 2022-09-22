@@ -32,10 +32,15 @@
                 </div> 
             <% } %>
             <div class="form-div">
-                <label for="bodega" class="form-label">Bodega:</label>
-                <input type="bodega" id="bodega" name="bodega" 
-                value="<%= locals.oldData ? oldData.bodega : productToEdit.Bodega.nameBodega %>"
-                class="form-input">
+                <label for="bodegaId" class="form-label">Bodega:</label>
+                <select name="bodegaId" id="">
+                    <% bodegas.forEach(bodega => { %>
+                     <option value="<%= bodega.id %>"><%= bodega.nameBodega %> </option>
+                    <% }) %>
+                </select>
+                <!--<input type="bodega" id="bodega" name="bodega" 
+                value="<%= //locals.oldData ? oldData.bodega : productToEdit.Bodega.nameBodega %>"
+                class="form-input">-->
             </div>
             <% if (locals.errors && errors.bodega) { %>
                 <div class="errorValidacion">
@@ -43,10 +48,15 @@
                 </div> 
             <% } %>
             <div class="form-div">
-                <label for="varietal" class="form-label">Varietal:</label>
-                <input type="text" id="varietal" name="varietal" 
-                value="<%= locals.oldData ? oldData.varietal : productToEdit.Varietal.nameVarietal %>"
-                class="form-input">
+                <label for="varietalId" class="form-label">Varietal:</label>
+                <select name="varietalId" id="">
+                    <% varietales.forEach(varietal => { %>
+                     <option value="<%= varietal.id %>"><%= varietal.nameVarietal %> </option>
+                    <% }) %>
+                </select>
+                <!--<input type="text" id="varietal" name="varietal" 
+                value="<%= //locals.oldData ? oldData.varietal : productToEdit.Varietal.nameVarietal %>"
+                class="form-input">-->
             </div>
             <% if (locals.errors && errors.varietal) { %>
                 <div class="errorValidacion">
@@ -74,7 +84,8 @@
                 <label for="image" class="form-label">Foto:</label>
                 <input type="file" id="image" accept=".png, .jpeg, .jpg" 
                 name="image" placeholder="Ingrese una foto" class="form-input" 
-                value="<%= productToEdit.Imagesproducts[0].nameImage%>"  multiple>
+                value="<%=//productToEdit.Imagesproducts[0].nameImage %>"  multiple>
+                
             </div>
             <% if (locals.errors && errors.image) { %>
                 <div class="errorValidacion">
@@ -109,7 +120,7 @@
             <% } %>
             <div class="form-div">
                 <label for="description" class="form-label">Descripción:</label>
-                <textarea name="description" id="description" class="form-input"><%= productToEdit.description%></textarea>
+                <textarea name="description" id="description" class="form-input"><%= locals.oldData ? oldData.description :productToEdit.description%></textarea>
             </div>
             <div class="form-buttons">
                 <button type="submit">Guardar producto</button>

@@ -144,10 +144,12 @@ const controller = {
 		//console.log('ESTOY USANDO EL EDIT DEL GENERICO')
         try {
             const { id } = req.params
+            const bodegas = await Bodegas.findAll()
+            const varietales = await Varietal.findAll()
             const productToEdit = await Product.findByPk(id, {
                 include: [Bodegas,Varietal,Imagesproduct]
             });
-            return res.render('product-edit-form', {productToEdit});
+            return res.render('product-edit-form', {productToEdit, bodegas, varietales});
             
         }catch (error) {
             res.json(error.message)
@@ -159,11 +161,18 @@ const controller = {
 
 	// Update - Method to update
 
-    update: (req, res) => {
+    update: async (req, res) => {
+        try {
         // const files = req.files;
         const { files } = req;
         // const id = req.params.id;
         const { id } = req.params;
+        const bodegas = await Bodegas.findAll()
+        const varietales = await Varietal.findAll()
+        const productToEdit2 = await Product.findByPk(id, {
+            include: [Bodegas,Varietal,Imagesproduct]
+        });
+      
         
         console.log("-----LLEGO/ARON ESTA/S FOTO/S --------")
         files.forEach( file => {
@@ -190,6 +199,9 @@ const controller = {
             const productToEdit = productModel.find(id);
 
             return res.render('product-edit-form.ejs', {
+                bodegas,
+                varietales,
+                productToEdit2,
                 productToEdit,
                 errors: resultadosValidaciones.mapped(),
                 // oldData son los datos recién cargados es decir el req.body
@@ -220,7 +232,9 @@ const controller = {
                 const filePath = path.join(__dirname, `../../public/images/products/${imagen}`);
                 fs.unlinkSync(filePath);
             })
+            
         }
+    
 
         productToEdit = {
             id: productToEdit.id,
@@ -231,10 +245,12 @@ const controller = {
 
         productModel.update(productToEdit)
         res.redirect("/");
-
+    }catch (error) {
+        res.json(error.message)
+    }
     },
 
-	update2: (req, res) => {
+	/*update2: (req, res) => {
 		let productToEdit = productModel.find(req.params.id)
 
 		let imagenes = [];
@@ -255,7 +271,7 @@ const controller = {
 		productModel.update(productToEdit)
 		res.redirect("/");
 
-	},
+	},*/
 
 
     destroy: function(req,res){

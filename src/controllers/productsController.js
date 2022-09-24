@@ -80,10 +80,14 @@ const controller = {
             console.log(resultadosValidaciones.mapped());  
             
             console.log(req.body);
+            const bodegas = await Bodegas.findAll()
+            const varietales = await Varietal.findAll()
             return res.render('product-create-form', {
                 errors: resultadosValidaciones.mapped(),
                 // oldData son los datos recién cargados es decir el req.body
                 oldData: req.body,
+                bodegas,
+                varietales
               
             })
             
@@ -254,24 +258,36 @@ const controller = {
 
 
     destroy: async (req, res) => {
-        const id = req.params.id;
-        await Imagesproduct.destroy({
-            where: {
+        try {
+            const { id } = req.params;
+            let imagenDel = await Imagesproduct.findAll({
+                where: {productId: id}
+            });
+            console.log(imagenDel)
+            console.log(imagenDel[0].nameImage)
+            if (imagenDel.nameImage != 'default-product-image.png') {
+                fs.unlinkSync(path.resolve(__dirname, '../../public/images/products/'+imagenDel[0].nameImage))
+            }
+            
+            await Imagesproduct.destroy({
+                where: {
                 productId: id
+                }
+            }, {
+                force: true
+            });
+            await Product.destroy({
+                where: {
+                    id: id
+                }
+            }, {
+                force: true
+            })
+            res.redirect("/");
+            } catch (error) {
+            res.json(error.message)
             }
-        }, {
-            force: true
-        });
-        await Product.destroy({
-            where: {
-                id: id
-            }
-        }, {
-            force: true
-        })
-        res.redirect("/");
     }
-
 
 
 };

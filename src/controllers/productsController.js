@@ -196,8 +196,8 @@ const controller = {
             console.log("-------- my body -------------------")
             console.log(req.body);  
 
-            const productToEdit = productModel.find(id);
-
+            //const productToEdit = productModel.find(id);
+            const productToEdit = productToEdit2
             return res.render('product-edit-form.ejs', {
                 bodegas,
                 varietales,
@@ -250,32 +250,25 @@ const controller = {
     }
     },
 
-	/*update2: (req, res) => {
-		let productToEdit = productModel.find(req.params.id)
-
-		let imagenes = [];
-		// leo secuencialmente el array de fotos y las cargo en el array de imágenes
-		//  puede ser que venga una sóla foto
-		for(let i = 0 ; i < req.files.length; i++){
-			imagenes.push(req.files[i].filename)
-		}
-		productToEdit = {
-
-			id: productToEdit.id,
-			...req.body,
-		// Si se suben imagenes se pone como valor el array imagenes y sino se queda el que ya estaba antes
-			image: req.files.length >= 1  ? imagenes : productToEdit.image,
-			visitado: productToEdit.visitado
-		}
-		console.log(productToEdit)
-		productModel.update(productToEdit)
-		res.redirect("/");
-
-	},*/
+	
 
 
-    destroy: function(req,res){
-        productModel.delete(req.params.id);
+    destroy: async (req, res) => {
+        const id = req.params.id;
+        await Imagesproduct.destroy({
+            where: {
+                productId: id
+            }
+        }, {
+            force: true
+        });
+        await Product.destroy({
+            where: {
+                id: id
+            }
+        }, {
+            force: true
+        })
         res.redirect("/");
     }
 

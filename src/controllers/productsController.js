@@ -54,14 +54,9 @@ const controller = {
             console.log(file.filename);
         })        
         
-        // request
-        // console.log('Esto tiene el request');
-        // console.log(req);
 
         // Comienzo a validar//Guardo los resultados de la validacion en una variable
         const resultadosValidaciones = validationResult(req);//viene de express validator linea 6
-        // console.log('Esto tiene el resultadosValidaciones');      
-        // console.log(resultadosValidaciones);
        
         // Con este if preguntamos si hay errores de validación
         if (!resultadosValidaciones.isEmpty()){
@@ -185,7 +180,6 @@ const controller = {
         
         // Comienzo a validar
         const resultadosValidaciones = validationResult(req);
-        console.log(resultadosValidaciones);
        
         // Con este if preguntamos si hay errores de validación
         if (!resultadosValidaciones.isEmpty()){
@@ -214,20 +208,35 @@ const controller = {
         }
 
         console.log("--Muy bien, no hay errores ---------------------------");
-
-
-        let productToEdit = productModel.find(id);
+        let dataUpdate = req.body;
+                let imagenes= []
+                const product = await Product.update({
+                    ...dataUpdate,
+                }, {
+                    where: {
+                        id: id
+                    }
+                });
+                for(let i = 0 ; i<req.files.length;i++) {
+                    imagenes.push({
+                        nameImage: req.files[i].filename,
+                        productId: id
+                    })
+                }
+                if (imagenes.length > 0) {
+                    await Imagesproduct.bulkCreate(imagenes)
+                }
+                res.redirect('/')
+        //let productToEdit = productModel.find(id);
 
         // Creamos un array vacío para ir almacenado los nombres de los archivos
-        let imagenes = [];
+        /*let imagenes = [];
 
         //  Leo de manera secuencial  el array files del request y cargo los nombres en el array de imágenes
         //  puede ser que venga una sola foto
         files.forEach( imagen => {
             imagenes.push(imagen.filename);
         })
-
-        console.log(imagenes);
 
         // si enviaron imagenes nuevas vamos a borrar del file system las anteriores
         if(imagenes.length > 0){
@@ -236,19 +245,14 @@ const controller = {
                 const filePath = path.join(__dirname, `../../public/images/products/${imagen}`);
                 fs.unlinkSync(filePath);
             })
-            
-        }
-    
-
         productToEdit = {
             id: productToEdit.id,
             ...req.body,
             // Si se suben imagenes se pone como valor el array imagenes y sino se queda el que ya estaba antes
             image: req.files.length >= 1 ? imagenes : productToEdit.image
         }
-
         productModel.update(productToEdit)
-        res.redirect("/");
+        res.redirect("/");*/
     }catch (error) {
         res.json(error.message)
     }

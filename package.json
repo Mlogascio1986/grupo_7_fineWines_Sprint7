@@ -1,7 +1,6 @@
 {
   "name": "finewines6",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node src/app.js",
@@ -25,5 +24,15 @@
     "nodemon": "^2.0.18",
     "sequelize": "^6.21.4",
     "sequelize-cli": "^6.4.1"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marcosGO1970/grupo_7_fineWines_Sprint6.git"
+  },
+  "bugs": {
+    "url": "https://github.com/marcosGO1970/grupo_7_fineWines_Sprint6/issues"
+  },
+  "homepage": "https://github.com/marcosGO1970/grupo_7_fineWines_Sprint6#readme",
+  "description": ""
 }

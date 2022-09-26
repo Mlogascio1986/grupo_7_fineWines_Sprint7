@@ -7,6 +7,8 @@ const {Op} = require('sequelize')
 const userLoggedMiddleware = async (req, res, next) => {      
 res.locals.isLogged = false;
 let emailInCookie = req.cookies.userEmail;
+
+
 try{
     const userFromCookie = await User.findOne({
         where: {

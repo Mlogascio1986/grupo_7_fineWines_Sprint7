@@ -33,7 +33,7 @@ app.set('views', path.join(__dirname, 'views'))
 
 app.use(methodOverride("_method"));//Para poder usar PUT y DELETE
 app.use(express.urlencoded({ extended: false }));//Para formularios
-app.use(express.json());
+app.use(express.json());// con esto podemos procesar peticiones que viajen en formato json
 
 app.use('/', mainRouter)
 app.use('/user', userRouter)

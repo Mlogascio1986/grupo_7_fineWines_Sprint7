@@ -47,6 +47,23 @@ const mainController = {
         //const product = products.find( product => product.id === id);
 
         //res.render('productDetail', {product});
+    },
+    productDetailApi: async (req,res) => {
+        //const id = Number(req.params.id);
+        try {
+            const { id } = req.body
+            const product = await Product.findByPk(id, {
+                include: [Bodegas,Varietal,Imagesproduct]
+            });
+            return res.json({product});
+            
+        }catch (error) {
+            res.json(error.message)
+        }
+        //const products = productModel.readFile()
+        //const product = products.find( product => product.id === id);
+
+        //res.render('productDetail', {product});
     }
 }
 

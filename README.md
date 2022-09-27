@@ -1,3 +1,4 @@
-Trello
+https://trello.com/b/YzDmkwff/fine-wines
 
-Usuario Admin
+usuario admin admin@hotmail.com
+psw 12345678

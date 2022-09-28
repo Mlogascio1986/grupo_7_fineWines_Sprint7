@@ -1,4 +1,4 @@
-const {Product, Bodegas, Varietal, Imagesproduct} = require('../dataBase/models');
+const {Product, Bodegas, Varietal, Imagesproduct} = require('../database/models');
 
 const  {validationResult} = require('express-validator');
 const path = require('path');

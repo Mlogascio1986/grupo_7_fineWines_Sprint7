@@ -6,7 +6,7 @@ const methodOverride = require('method-override');
 const session = require('express-session')
 const userLoggedMiddleware = require('./middleware/userLoggedMiddleware');
 const cookies = require('cookie-parser');
-
+//heroku git:remote -a fwines-sp6-grupo7
 //inicializo session
 app.use(session({
     secret:'xx',

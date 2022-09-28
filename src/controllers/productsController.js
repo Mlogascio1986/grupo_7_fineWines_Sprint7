@@ -5,28 +5,7 @@ const path = require('path');
 const fs = require('fs');
 const toThousand = n => n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 
-const jsonDB = require('../model/jsonDatabase');
-const productModel = jsonDB('products')
-
 const controller = {
-
-
-	/*detail: (req, res) => {
-		const product = productModel.find(req.params.id)
-		console.log("------------ESTOY EN DETAIL----------------------")
-		console.log(product)
-		console.log(product.image[0])
-		// COn este veo las otras fotos por eso el índice empieza en UNO Esto NO SIRVE !!!
-		console.log("VEO LAS SIGUIENTES FOTOS")
-		for( let i = 1; i < (product.image).length; i++ ) { 
-			console.log(product.image[i] )
-		
-		}
-		res.render('detail', {
-			product,
-			toThousand
-		})
-	},*/
 
 	// Create - Form to create
 	create: async (req, res) => {
@@ -227,8 +206,6 @@ const controller = {
                     await Imagesproduct.bulkCreate(imagenes)
                 }
                 res.redirect('/')
-        //let productToEdit = productModel.find(id);
-
         // Creamos un array vacío para ir almacenado los nombres de los archivos
         /*let imagenes = [];
 

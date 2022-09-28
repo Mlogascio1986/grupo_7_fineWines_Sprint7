@@ -1,8 +1,4 @@
 const {Product, Bodegas, Varietal, Imagesproduct} = require('../dataBase/models');
-// requerimos el modelo para consultar la base de datos json
-const jsonDB = require('../model/jsonDatabase');
-// indicamos cual de las bases de datos queremos
-const productModel = jsonDB('products')
 const { validationResult } = require("express-validator");
 
 //const products = productModel.readFile()

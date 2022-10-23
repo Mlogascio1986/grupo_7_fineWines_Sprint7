@@ -18,6 +18,24 @@ const userController = {
 	loginProcess: async (req, res) => {
 		//console.log("llego al proceso de login")
 		//let userToLogin = userModel.findFirstByField("email", req.body.email)
+        
+        const { file } = req;
+
+        const errores = validationResult(req);
+
+        console.log(errores)
+
+        if(!errores.isEmpty()){
+
+            delete req.body.password;
+
+            return res.render("./users/login", {
+                errors: errores.mapped(),
+                oldData: req.body,
+            })
+            console.log('renderice errores de validacion del middleware')
+        }
+
         try{
             const userToLogin = await User.findOne({
                 where: {
@@ -26,12 +44,17 @@ const userController = {
             })
         
             //console.log(req.body.nombreUsuario)
-		//console.log(userToLogin)
+		console.log(userToLogin)
         // dos problemas: 1. no encuentra el user.
         
                 if(userToLogin){
                     console.log("llego al if con userToLogin = true")
+                    
+                    
+                    
                     let isOkThePassword = bcryptjs.compareSync(req.body.password, userToLogin.password)
+
+                    console.log(isOkThePassword)
                     
                     if(isOkThePassword){
                         // borro la psw para que no quede en las cookies
@@ -46,9 +69,13 @@ const userController = {
                         //return res.render('users/profile.ejs', {user: req.session.userLogged})
                         return res.redirect("/")
                     }}
+                    delete req.body.password;
                     return res.render('users/login.ejs',{errors: 
                                                             {credenciales: 
-                                                                {msg: 'Las credenciales son invalidas'}}})
+                                                                {msg: 'Las credenciales son invalidas'}},
+                                                            oldData: req.body
+                                                            })
+                    console.log(locals.errors.credenciales.msg)
 
         } 
         catch (error) {res.json(error.message) }

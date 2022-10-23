@@ -21,11 +21,11 @@
             
             <div class="form-div">
                 <label for="email" class="form-label">Email usuario/a</label>
-                <input type="email" name="email" id="email" >
+                <input type="email" name="email" id="email" value= "<%= locals.oldData ? oldData.email: null %>">
             </div>
-            <% if(locals.errors && errors.credenciales){ %> 
+            <% if(locals.errors && errors.email){ %> 
             <div class="errorValidacion">
-                <%= errors.credenciales.msg  %> 
+                <%= errors.email.msg  %> 
             </div>
             <% } %> 
 
@@ -33,7 +33,18 @@
                 <label for="password" class="form-label">Contraseña</label>
                 <!-- Micro-Desafío 3 required - Clase 15 -->
                 <input type="password" name="password" id="password" >
-            </div> 
+            </div>
+            <% if(locals.errors && errors.password){ %> 
+                <div class="errorValidacion">
+                    <%= errors.password.msg  %> 
+                </div>
+                <% } %>
+            <% if(locals.errors && errors.credenciales){ %> 
+                <div class="errorValidacion">
+                    <%= errors.credenciales.msg  %> 
+                </div>
+                <% } %>
+
             <div class="form-div2">
                 <label class="form-check-label">
                     <input type="checkbox" class="form-check-input" name="remember_user">  Recordar mi usuario

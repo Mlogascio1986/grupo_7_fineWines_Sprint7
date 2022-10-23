@@ -16,7 +16,8 @@ const userRegisterValidation = [
     
     body("email")
         .notEmpty().withMessage("El campo no puede estar vacío").bail()
-        .isEmail().withMessage("El formato de correo no es válido"),
+        .isEmail().withMessage("El formato de correo no es válido").bail(),
+        // la validacion de mail registrado la realizo desde el controlador de user
 
     body("password")
         .notEmpty().withMessage("El campo no puede estar vacío").bail()
@@ -43,7 +44,7 @@ const userRegisterValidation = [
             const { file } = req;
 
             if(file){
-                const extensionesValidas = [".png", ".jpg", ".jpeg"];
+                const extensionesValidas = [".png", ".jpg", ".jpeg", ".gif"];
     
                 const fileExtension = path.extname(file.originalname);
     

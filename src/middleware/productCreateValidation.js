@@ -4,8 +4,9 @@ const path = require("path");
 
 const productCreateValidation = [
     body('name')
-        .notEmpty().withMessage("No puede estar el campo vacio").bail()
-        .isLength({ min: 4 }).withMessage('Debes escribir un nombre de producto con más de 4 caracteres'),
+        .notEmpty().withMessage("No puede estar el campo vacio").bail() 
+        // bail se usa para cortar la validacion y que no se ejecuten las demas validaciones
+        .isLength({ min: 5 }).withMessage('Debes escribir un nombre de producto con más de 5 caracteres'),
     
     body('bodegaId')
         .notEmpty().withMessage("No puede estar el campo vacio").bail(),
@@ -23,7 +24,7 @@ const productCreateValidation = [
         
 	body('description')
         .notEmpty().withMessage('Debe escribir una descripción').bail()
-	    .isLength({ min: 4 }).withMessage('Debe escribir como mínimo 4 letras o caracteres'),
+	    .isLength({ min: 20 }).withMessage('Debe escribir como mínimo 20 letras o caracteres'),
 
 	body("image")
         .custom((value, {req}) => {

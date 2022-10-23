@@ -32,7 +32,7 @@ const productEditValidation = [
             const { files } = req;
 	
             if( files.length > 0){
-                const extensionesValidas = [".png", ".jpg", ".jpeg"];
+                const extensionesValidas = [".png", ".jpg", ".jpeg", ".gif" ];
     
                 files.forEach( file => {
                     const fileExtension = path.extname(file.originalname)

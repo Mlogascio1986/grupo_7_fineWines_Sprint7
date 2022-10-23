@@ -4,6 +4,7 @@ const router= express.Router();
 const guestMiddleware = require('../middleware/guestMiddleware');
 const authMiddleware = require('../middleware/authMiddleware');
 const userRegisterValidation = require('../middleware/userRegisterValidation');
+const userLoginValidation = require('../middleware/userLoginValidation');
 // ************ Controller Require ************
 const userController = require ('../controllers/userController.js')
 const uploadPrep = require('../middleware/middlemulter')
@@ -13,7 +14,7 @@ console.log('pase por el userRouter');
 
 router.get('/login', guestMiddleware, userController.login);
 
-router.post('/login', userController.loginProcess);
+router.post('/login', userLoginValidation, userController.loginProcess);
 
 router.get('/register', userController.register);
 //router.post('/', upload.array('image'), userController.store);

@@ -23,8 +23,9 @@
                 <label for="email" class="form-label">Email usuario/a</label>
                 <input type="email" name="email" id="email" tabindex="0" value= "<%= locals.oldData ? oldData.email: null %>">
             </div>
+            <div class="errorValidacion" id="emailErrorFront"></div>
             <% if(locals.errors && errors.email){ %> 
-            <div class="errorValidacion" id="emailError">
+            <div class="errorValidacion">
                 <%= errors.email.msg  %> 
             </div>
             <% } %> 
@@ -34,8 +35,9 @@
                 <!-- Micro-Desafío 3 required - Clase 15 -->
                 <input type="password" name="password" id="password" >
             </div>
+            <div class="errorValidacion" id="passwordErrorFront"></div>
             <% if(locals.errors && errors.password){ %> 
-                <div class="errorValidacion" id="passwordError">
+                <div class="errorValidacion">
                     <%= errors.password.msg  %> 
                 </div>
                 <% } %>

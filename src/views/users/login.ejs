@@ -16,15 +16,15 @@
         <!------- Formulario ---------->
         <div class="form-container">
         <h2 class="register-title">Ingresa!!</h2>
-        <form class="register-form" action="/user/login" method="POST">
+        <form class="register-form" action="/user/login" method="POST" id="login-form">
            
             
             <div class="form-div">
                 <label for="email" class="form-label">Email usuario/a</label>
-                <input type="email" name="email" id="email" value= "<%= locals.oldData ? oldData.email: null %>">
+                <input type="email" name="email" id="email" tabindex="0" value= "<%= locals.oldData ? oldData.email: null %>">
             </div>
             <% if(locals.errors && errors.email){ %> 
-            <div class="errorValidacion">
+            <div class="errorValidacion" id="emailError">
                 <%= errors.email.msg  %> 
             </div>
             <% } %> 
@@ -35,7 +35,7 @@
                 <input type="password" name="password" id="password" >
             </div>
             <% if(locals.errors && errors.password){ %> 
-                <div class="errorValidacion">
+                <div class="errorValidacion" id="passwordError">
                     <%= errors.password.msg  %> 
                 </div>
                 <% } %>
@@ -71,5 +71,6 @@
     </main> 
   <!--Incluyo el partial footer-->
   <%- include('../partials/footer.ejs') %>
+  <script src="/js/userLoginValidation.js"></script>
 </body>
 </html>

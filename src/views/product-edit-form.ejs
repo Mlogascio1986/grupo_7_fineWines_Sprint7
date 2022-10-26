@@ -19,13 +19,14 @@
         <!------- Formulario ---------->
         <div class="form-container">
         <h2 class="register-title">Formulario de Edicion De Productos</h2>
-        <form class="register-form" action="/products/edit/<%= productToEdit.id %>?_method=PUT" method="POST" enctype="multipart/form-data">				
+        <form class="register-form" action="/products/edit/<%= productToEdit.id %>?_method=PUT" method="POST" enctype="multipart/form-data" id="productEdit-form">				
             <div class="form-div">
                 <label for="name" class="form-label">Nombre del producto:</label>
                 <input type="text" id="name" name="name" 
                 value="<%= locals.oldData ? oldData.name : productToEdit.name %>"
                 class="form-input">
             </div>
+            <div class="errorValidacion" id="nameError"></div>
             <% if (locals.errors && errors.name) { %>
                 <div class="errorValidacion">
                     <p><%= errors.name.msg %></p>
@@ -87,6 +88,7 @@
                 value="<%=productToEdit.Imagesproducts[0].nameImage %>"  multiple>
                 
             </div>
+            <div class="errorValidacion" id="imageError"></div>
             <% if (locals.errors && errors.image) { %>
                 <div class="errorValidacion">
                     <p><%= errors.image.msg %></p>
@@ -122,6 +124,7 @@
                 <label for="description" class="form-label">Descripción:</label>
                 <textarea name="description" id="description" class="form-input"><%= locals.oldData ? oldData.description :productToEdit.description%></textarea>
             </div>
+            <div class="errorValidacion" id="descriptionError"></div>
             <div class="form-buttons">
                 <button type="submit">Guardar producto</button>
                 <button type="reset" class="reset-button">Limpiar</button>
@@ -136,5 +139,6 @@
 	<!-- footer -->
 	<%- include('partials/footer') %>
 	<!-- /footer -->
+    <script src="/js/productEditValidation.js"></script>
 </body>	
 </html>

@@ -52,7 +52,7 @@ window.addEventListener("load", function () {
       emailValidation();
       passwordValidation();
   
-      if (errors.email || errors.password) {
+      if (Object.keys(errors).length) {
         e.preventDefault();
       }
     });

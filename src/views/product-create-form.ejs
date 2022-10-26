@@ -13,7 +13,7 @@
 	<div class="form-container">
 		<h2 class="register-title">Formulario de creación de productos</h2>
 			<!-- el enctype es fundamental para Multer-->
-			<form class="register-form" action="/products" method="POST" enctype="multipart/form-data">				
+			<form class="register-form" action="/products" method="POST" enctype="multipart/form-data" id="productCreate-form">				
 					<div class="form-div">
 						<label for="name" class="form-label">Nombre del producto:</label>
 						<input type="text" id="name" name="name" 
@@ -21,6 +21,7 @@
 						value= "<%= locals.oldData ? oldData.name : null %>"
 						class="form-input">
 					</div>
+					<div class="errorValidacion" id="nameError"></div>
 					<br><% if (locals.errors && errors.name) { %>
 						<div class="errorValidacion">
 							<p><%= errors.name.msg %></p>
@@ -89,6 +90,7 @@
 						name="image" placeholder="Ingrese una foto"  multiple  class="form-input"
 						value="<%= locals.oldData ? oldData.image : null  %>">
 					</div>
+					<div class="errorValidacion" id="imageError"></div>
 					<% if (locals.errors && errors.image) { %>
 						<div class="errorValidacion">
 							<p><%= errors.image.msg %></p>
@@ -117,6 +119,7 @@
 						<label for="description" class="form-label">Descripción:</label>
 						<textarea name="description" id="description"  class="form-input"><%= locals.oldData ? oldData.description : null %></textarea>
 					</div>
+					<div class="errorValidacion" id="descriptionError"></div>
 					<% if (locals.errors && errors.description) { %>
 					<div class="errorValidacion">
 						<p><%= errors.description.msg %></p>
@@ -138,5 +141,6 @@
 	<!-- footer -->
 	<%- include('partials/footer') %>
 	<!-- /footer -->
+	<script src="/js/productCreateValidation.js"></script>
 </body>	
 </html>

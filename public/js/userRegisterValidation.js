@@ -87,7 +87,7 @@ window.addEventListener("load", function () {
     function fotoUsuarioValidation() {
             let allowedExtensions = /(\.jpg|\.jpeg|\.png)$/i;
             if (!allowedExtensions.exec(fotoUsuario.value)) {
-               errors.fotoUsuario = 'Los tipos de archivos validos son: .jpg, .jpeg y .png'; 
+               errors.fotoUsuario = 'Ingrese una imagen en alguno de los siguientes formatos: .jpg, .jpeg y .png'; 
             } else {
                 delete errors.fotoUsuario;
                 fotoUsuarioError.innerText = "";
@@ -106,14 +106,16 @@ window.addEventListener("load", function () {
         nombresValidation();
         apellidosValidation();
         
-        if (errors.nombres) {
-            window.prompt('entre al error')
+        //Object.keys() recibe un objeto y devuelve un array con los nombres de todos las propiedades del objeto
+        //si hay una o mas propiedades en error el array va a tener una longitud mayor a 0 y por lo tanto el if lo toma como true
+        //si es 0 lo toma como false
+
+        if (Object.keys(errors).length) {
           e.preventDefault();
         }
       });
     
-      // Corremos las validaciones cuando el user sale del campo password y email
-      //email.addEventListener('blur', emailValidation());
+      // Corremos las validaciones cuando el user sale del campo 
       nombres.addEventListener("blur", () => nombresValidation());
       apellidos.addEventListener("blur", () => apellidosValidation());
       email.addEventListener("blur", () => emailValidation());

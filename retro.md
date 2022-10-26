@@ -1,18 +1,15 @@
 1 Que hicimos bien
 
-    Planificamos y nos distribuimos el trabajo entre los miembros del equipo.
-    Verificamos todos los casos de prueba que teniamos identificados
-    Logramos cumplir con los entregables en tiempo y forma.
+    Detalle claro de los requerimientos a realizar
+    Verificion de todos los casos de prueba
 
 2 Que hicimos mal
 
-    Perdimos bastante tiempo en subir todo a heroku.
-    El rol lo hardcodeamos a mano. No esta hecha la inteligencia
+    Falta de equipo completo y entrega no salio a tiempo
 
 3 En que podemos mejorar
 
-    Seguir agregando logica para hacer al producto mas completo.
-    Seguir trabajando en el look and feel.
+    Seguir con esfuerzo para cumplir fechas de entrega
     
 4 Qué tenemos que dejar de hacer?
 
@@ -20,6 +17,6 @@
 
 5 Qué podemos empezar a hacer?
 
-    Adelantar sprint 7
+    Sprint 8
 
 

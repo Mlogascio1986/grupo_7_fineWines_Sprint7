@@ -100,16 +100,16 @@ window.addEventListener("load", function () {
     // validations when the users submit the form
     form.addEventListener("submit", function (e) {
 
-       /* emailValidation();
+        emailValidation();
         passwordValidation();
         fotoUsuarioValidation();
         nombresValidation();
-        apellidosValidation();*/
+        apellidosValidation();
         
-        //if (errors.nombres) {
+        if (errors.nombres) {
             window.prompt('entre al error')
           e.preventDefault();
-        //}
+        }
       });
     
       // Corremos las validaciones cuando el user sale del campo password y email

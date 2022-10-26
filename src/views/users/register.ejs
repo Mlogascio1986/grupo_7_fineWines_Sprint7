@@ -17,7 +17,7 @@
         <!------- Formulario ---------->
         <div class="form-container">
         <h2 class="register-title">Registrate!!</h2>
-        <form class="register-form" action="/user/register" method="POST" enctype="multipart/form-data">
+        <form class="register-form" action="/user/register" method="POST" enctype="multipart/form-data" id="register-form">
             <div class="form-div">
                 <label for="nombres" class="form-label">Nombres</label>
                 
@@ -26,6 +26,7 @@
                 >
                 
             </div>
+            <div class="errorValidacion" id="nombresErrorFront"></div>
             <% if (locals.errors && errors.nombres) { %>
                 <div class="errorValidacion">
                     <%= errors.nombres.msg %>
@@ -34,9 +35,11 @@
             <div class="form-div">
                 <label for="apellidos" class="form-label">Apellidos</label>
                 
-                <input type="text" name="apellidos" 
+                <input type="text" name="apellidos" id="apellidos"
                 value= "<%= locals.oldData ? oldData.apellidos: null %>">
             </div>
+            <div class="errorValidacion" id="apellidosErrorFront"></div>
+
             <% if (locals.errors && errors.apellidos) { %>
                 <div class="errorValidacion">
                     <%= errors.apellidos.msg %>
@@ -58,7 +61,9 @@
                 
                 <input type="email" name="email" id="email" 
                 value= "<%= locals.oldData ? oldData.email: null %>">
-            </div>  
+            </div>
+            
+            <div class="errorValidacion" id="emailErrorFront"></div>
             <% if (locals.errors && errors.email) { %>
                 <div class="errorValidacion">
                     <%= errors.email.msg %>
@@ -83,6 +88,7 @@
                 <label for="fotoUsuario" class="form-label">Foto de usuario</label>
                 <input class="foto" type="file" name="fotoUsuario" id="fotoUsuario" accept=".png, .jpeg, .jpg" value="default-image.jpg" >
             </div>
+            <div class="errorValidacion" id="fotoUsuarioErrorFront"></div>
             <% if (locals.errors && errors.fotoUsuario) { %>
                 <div class="errorValidacion">
                     <%= errors.fotoUsuario.msg %>
@@ -91,7 +97,8 @@
             <div class="form-div">
                 <label for="password" class="form-label">Contraseña</label>
                 <input type="password" name="password" id="password" >
-            </div> 
+            </div>
+            <div class="errorValidacion" id="passwordErrorFront"></div>
             <% if (locals.errors && errors.password) { %>
                 <div class="errorValidacion">
                     <%= errors.password.msg %>
@@ -122,4 +129,5 @@
 </body>
     <!--Incluyo el partial footer-->
     <%- include('../partials/footer.ejs') %>
+    <script src="/js/userRegisterValidation.js"></script>
 </html>

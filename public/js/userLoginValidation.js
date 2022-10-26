@@ -35,7 +35,7 @@ window.addEventListener("load", function () {
     //Si hay error, lo muestro en pantalla
     function passwordValidation() {
       if (password.value.trim() == "") {
-        errors.password = "La contraseña no puede estar vacio";
+        errors.password = "La contraseña no puede estar vacía";
       } else if (password.value.length < 8) {
         errors.password = "La contraseña debe contener 8 caracteres como mínimo";
       } else {
